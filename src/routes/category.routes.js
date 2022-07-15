@@ -14,6 +14,8 @@ module.exports = (app) => {
     app.delete(`/deletedCategory/:id`,controller.deletedCategory);
     app.post(`/createdataCategoryDetail`,controller.CreateDetailCategory);
     app.get(`/getCategoryDetail`,controller.getCreategoryDetail);
-    app.delete(`/deletedCategoryDetail/:id`,controller.deleteCategoryDetail)
+    app.delete(`/deletedCategoryDetail/:id`,controller.deleteCategoryDetail);
+    app.get('/detailCategory', controller.getDetailCategories);
+    app.get(`/showdetailCategory/:type`,controller.getdetailshow);
 
 };

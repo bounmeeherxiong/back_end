@@ -31,16 +31,13 @@ exports.getAllParents = async (req, res) => {
       "select * from tb_account_test where fullname = ?",
       [selectedId]
     );
-
     if (parent.length === 0) {
       return res.status(200).json({ message: "empty" });
     }
-
     let parentsList = [];
     const { parent_id } = parent[0];
     parentsList.push(parent[0]);
     let parent_id_checking = parent_id;
-
     for (let i = 0; i < 15; i++) {
       const parent = await connection(
         "select * from tb_account_test where id = ?",
@@ -52,7 +49,6 @@ exports.getAllParents = async (req, res) => {
         parent_id_checking = parent_id;
       }
     }
-
     return res.status(200).json({ message: parentsList });
   } catch (error) {
     return res.status(404).json({ message: "error" });

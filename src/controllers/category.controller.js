@@ -82,3 +82,26 @@ exports.deleteCategoryDetail = async (req, res) => {
         return res.status(404).json({ message: err });
     }
 };
+
+exports.getDetailCategories = async (req, res) => {
+    try {
+      const name = await connection("SELECT d.*, c.Category_name FROM `tb_detailcategory` d inner join tb_category c on c.Category_id = d.Category_id");
+      return res.status(200).json({message: name});
+    } catch (error) {
+      return res.status(404).json({ message: "error" });
+    }
+  };
+
+  exports.getdetailshow = async (req, res) => {
+    try {
+      const {type} = req.params;
+     
+
+      const catetory = await connection("SELECT * FROM `tb_detailcategory` WHERE Category_id=?",[type]);
+      return res.status(200).json(catetory);
+    } catch (error) {
+      return res.status(404).json({ message: "error1" });
+    }
+  };
+
+  
