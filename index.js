@@ -10,11 +10,11 @@ app.get("/", (req, res) => {
     return res.status(200).json({ message: "Hello Wolrd" });
 });
 
-require('./src/routes/Currencies.routes')(app);
-require('./src/routes/category.routes')(app);
-require('./src/routes/account.routes')(app);
+require('./src/routes/Category.routes')(app);
+require('./src/routes/test.routes')(app);
 
-const PORT = process.env.PORT || 81;
+
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });

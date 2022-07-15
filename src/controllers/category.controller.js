@@ -1,10 +1,82 @@
 const connection = require("../connections/db");
 
-exports.createCategory = async (req, res) => {
+exports.Create_Category = async (req, res) => {
     try {
-        const {Type_id,CategoryName,AccountingCode,Statu}=req.body;
-        const category = await connection("INSERT INTO tbl_categories(Type_id,CategoryName,AccountingCode,Statu)VALUES(?,?,?,?)",[Type_id,CategoryName,AccountingCode,Statu]);
-        return res.status(200).json(category);
+        const {Type_id,Category_name,CreteDate,CreateStatus}=req.body;
+        if (!Type_id) {
+            return res.status(400).json("Bad Syntax");
+        }
+        const account = await connection("INSERT INTO tb_category(Type_id,Category_name,CreteDate,CreateStatus)VALUES(?,?,?,?)",[Type_id,Category_name,CreteDate,CreateStatus]);
+        return res.status(200).json(account);
+    }
+    catch (err) {
+        return res.status(404).json({ message: err });
+    }
+};
+exports.CreateDetailCategory = async (req, res) => {
+
+    try {
+        const {Category_id,DetailType}=req.body;
+        if (!Category_id) {
+            return res.status(400).json("Bad Syntax");
+        }
+        const account = await connection("INSERT INTO tb_detailcategory(Category_id,DetailType)VALUES(?,?)",[Category_id,DetailType]);
+        return res.status(200).json(account);
+    }
+    catch (err) {
+        return res.status(404).json({ message: err });
+    }
+};
+
+exports.getDataType = async (req, res) => {
+    try {
+        const account = await connection("SELECT * FROM tb_type;");
+        return res.status(200).json(account);
+    }
+    catch (err) {
+        return res.status(404).json({ message: err });
+    }
+};
+exports.getCreategoryDetail = async (req, res) => {
+    try {
+        const account = await connection("SELECT a.Detail_id,a.DetailType,b.Category_id,b.Category_name FROM tb_detailcategory a INNER JOIN tb_category b ON b.Category_id=a.Category_id");
+        return res.status(200).json(account);
+    }
+    catch (err) {
+        return res.status(404).json({ message: err });
+    }
+};
+
+exports.getDateCategory = async (req, res) => {
+    try {
+        const account = await connection("SELECT a.Category_id,a.Category_name,a.CreteDate,b.Type_id,b.Type_name FROM tb_category a INNER JOIN tb_type b ON b.Type_id=a.Type_id");
+        return res.status(200).json(account);
+    }
+    catch (err) {
+        return res.status(404).json({ message: err });
+    }
+};
+exports.deletedCategory = async (req, res) => {
+    try {
+        const { id } = req.params;
+        if (!id) {
+            return res.status(400).json("Bad Syntax");
+        }
+        const account = await connection("DELETE FROM tb_category WHERE Category_id=?",[id]);
+        return res.status(200).json(account);
+    }
+    catch (err) {
+        return res.status(404).json({ message: err });
+    }
+};
+exports.deleteCategoryDetail = async (req, res) => {
+    try {
+        const { id } = req.params;
+        if (!id) {
+            return res.status(400).json("Bad Syntax");
+        }
+        const account = await connection("DELETE FROM tb_detailcategory WHERE Detail_id=?",[id]);
+        return res.status(200).json(account);
     }
     catch (err) {
         return res.status(404).json({ message: err });

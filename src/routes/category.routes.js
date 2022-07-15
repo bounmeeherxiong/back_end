@@ -1,4 +1,4 @@
-const controller = require('../controllers/category.controller');
+const controller = require('../controllers/Category.controller');
 module.exports = (app) => {
     app.use((req, res, next) => {
         res.header(
@@ -8,10 +8,12 @@ module.exports = (app) => {
         next();
     });
 
-    app.post(`/createCategory`,controller.createCategory);
-
-    
-
-
+    app.post(`/Create_Category`,controller.Create_Category);
+    app.get(`/getType`,controller.getDataType);
+    app.get(`/getCategory`,controller.getDateCategory);
+    app.delete(`/deletedCategory/:id`,controller.deletedCategory);
+    app.post(`/createdataCategoryDetail`,controller.CreateDetailCategory);
+    app.get(`/getCategoryDetail`,controller.getCreategoryDetail);
+    app.delete(`/deletedCategoryDetail/:id`,controller.deleteCategoryDetail)
 
 };

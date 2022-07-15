@@ -1,4 +1,4 @@
-const controller = require('../controllers/account.corntrollers');
+const controller = require('../controllers/ChartAccount.controllers');
 module.exports = (app) => {
     app.use((req, res, next) => {
         res.header(
@@ -7,6 +7,6 @@ module.exports = (app) => {
         );
         next();
     });
+    app.post(`/CreateChartAccount`,controller.CreateChartAccount);
 
-    app.post(`/CreateAccount`,controller.CreateAccount);
 };

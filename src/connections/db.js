@@ -11,7 +11,7 @@ const connectionData = mysql.createConnection({
   host: "localhost",
   user: 'root',
   password: '',
-  database: 'acount',
+  database: 'phongsavanh',
   port: '3306'
 });
 // database: 'bl-online-center',
