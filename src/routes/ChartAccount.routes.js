@@ -8,7 +8,7 @@ module.exports = (app) => {
         next();
     });
     app.post(`/CreateChartAccount`,controller.CreateChartAccount);
-    app.get(`/Allparents/:name`, controller.getAllParents);
+    app.get(`/Allparents/:id`, controller.getAllParents);
     app.get(`/Accountnames`, controller.getAccountName);
     app.get(`/Allaccounts`, controller.getAllAccounts);
 

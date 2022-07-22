@@ -11,7 +11,6 @@ app.get("/", (req, res) => {
 });
 
 require('./src/routes/Category.routes')(app);
-require('./src/routes/test.routes')(app);
 require('./src/routes/ChartAccount.routes')(app);
 
 

@@ -37,10 +37,10 @@ exports.CreateChartAccount = async (req, res) => {
 };
 exports.getAllParents = async (req, res) => {
   try {
-    const { name: selectedname } = req.params;
+    const { id: selectedname } = req.params;
     /*** get parents here */
     const parent = await connection(
-      "SELECT * FROM tb_chartaccounts where ChartAccountName = ?",
+      "SELECT * FROM tb_chartaccounts where Account_id = ?",
       [selectedname]
     );
     if (parent.length === 0) {
@@ -74,9 +74,9 @@ exports.getAllAccounts = async (req, res) => {
       "SELECT a.Account_id,a.ChartAccountName,a.Description,a.Balance,b.Category_id,b.Category_name,c.Detail_id,c.DetailType FROM tb_chartaccounts a INNER JOIN tb_category b ON b.Category_id=a.Category_id INNER JOIN tb_detailcategory c ON c.Detail_id=a.DetailCategory_id WHERE a.parent_id=?",
       [0]
     );
-    if (firstFloor.length === 0) {
-      return res.status(200).json({ message: "empty" });
-    }
+    // if (firstFloor.length === 0) {
+    //   return res.status(200).json({ message: "empty" });
+    // }
     const children = await connection(
       "SELECT a.Account_id,a.ChartAccountName,a.Description,a.parent_id,a.Balance,c.Detail_id,c.DetailType,b.Category_id,b.Category_name FROM tb_chartaccounts a INNER JOIN tb_category b ON b.Category_id=a.Category_id INNER JOIN tb_detailcategory c ON c.Detail_id=a.DetailCategory_id where a.parent_id <> ?",
       [0]
